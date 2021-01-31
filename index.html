@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<style type="text/css">
+		.divtime{
+			width: 100%;
+			border:1px solid;
+			text-align: center;
+		}
+
+	</style>
+
+<div>
+	<!-- Image -->
+</div>
+
+	<div class="divtime">
+		<p id="demo" class="Timmer" style="font-weight: bolder;font-size: xx-large;"></p><br>
+		<button onclick="StartTimer();" class="timmerbutton" style="width: 50%;color: white;background: green;font-size: large;">Start</button>
+	</div>
+	<div style=" width: 100%;text-align: center;padding-top: 20px;">
+		<p id="PickOne" style="font-weight: bolder;font-size: 30px;"></p>
+		<div style="width: 100%" id="image">
+		</div>		
+		<p id="desc"></p>
+		<p id="Person" style="font-size: 30px; ;color: blue;"></p>
+		<button onclick="DisplayTea();" class="timmerbutton" style="width: 50%;color: white;background: green;font-size: large;">Pick One</button>
+		<br>
+		
+	</div>
+	
+
+	<script type="text/javascript">
+		function DisplayTea(){
+		document.getElementById("image").innerHTML = "<img src='images/tea.gif' height='300' width='300'>";
+		document.getElementById("PickOne").innerHTML = "";
+		document.getElementById("desc").innerHTML = "";
+		document.getElementById("Person").innerHTML = "";
+		setTimeout(function(){ PickRandom(); }, 3000);
+		setTimeout(function(){ PickRandomPerson(); }, 3000);
+		
+		}
+		const Games = ["Read My Lips", "Pictionary", "Enact An Animal",  "Zoomed In", "Statue","ABC Story","Act As Emoji","Guess the State","SHOW AND TELL"];
+		function PickRandom() {
+			
+			const random = Math.floor(Math.random() * Games.length);
+			document.getElementById("PickOne").innerHTML = Games[random]
+
+			switch(Games[random]) {
+				case "Read My Lips":
+				document.getElementById("image").innerHTML = "<img src='images/read.jpg' height='300' width='300'>";
+				document.getElementById("desc").innerHTML = "The Selected Person has to say a sentence / dialogue / song given by.<br> But with their mike Off and video On.<br> 3 Rounds ";
+    			break;
+    			case "Pictionary":
+    			document.getElementById("image").innerHTML = "<img src='images/pics.jpg' height='300' width='300'>";
+    			document.getElementById("desc").innerHTML = "The Selected Person has to draw the picture on whiteboard and Others has to explain the movie / person name / Song.<br> No Words or Actions <br> 3 Rounds  ";
+    			break;
+    			case "Enact An Animal":
+    			document.getElementById("image").innerHTML = "<img src='images/animal.png' height='300' width='300'>";
+    			document.getElementById("desc").innerHTML = " The Selected Person has to Act like the Given Animal.<br> No Words <br> 3 Rounds";
+    			break;    			
+    			case "Zoomed In":
+    			document.getElementById("image").innerHTML = "<img src='images/zoom.jpg' height='300' width='300'>";
+    			document.getElementById("desc").innerHTML = "The Selected Person has to guess the Name / Place / Animal from the Zoomed In Image .<br> No Hints <br> 3 Rounds <br><a href='https://slideplayer.com/slide/13171039/' target='_target'>Click Here</a>";
+    			break;
+    			case "Statue":
+    			document.getElementById("image").innerHTML = "<img src='images/statue.jpg' height='300' width='300'>";
+    			document.getElementById("desc").innerHTML = "The Selected Person has to Remain like a Statue while Others Can disturb to move .<br> 1 Minute <br> 2 Rounds";
+    			break;
+    			
+    			case "ABC Story":
+    			document.getElementById("image").innerHTML = "<img src='images/abc.jpg' height='300' width='300'>";
+    			document.getElementById("desc").innerHTML = "The Selected Person has to say a story by making use of objects Given by the Others.<br> Each time a new object adds, the story should repeat from start.";
+    			break;
+    			case "Act As Emoji":
+    			document.getElementById("image").innerHTML = "<img src='images/Emoji.jpg' height='300' width='300'>";
+    			document.getElementById("desc").innerHTML = "The Selected Person has to Act like an Emoji which Others Can choose .<br> 3 Rounds";
+    			break;
+    			case "Guess the State":
+    			document.getElementById("image").innerHTML = "<img src='images/state.jpg' height='300' width='300'>";
+    			document.getElementById("desc").innerHTML = "The Selected Person has to guess the state name from the map outline. <br> 3 Rounds";
+    			break;
+				case "SHOW AND TELL":
+    			document.getElementById("image").innerHTML = "<img src='images/showtell.jpg' height='300' width='300'>";
+    			document.getElementById("desc").innerHTML = "The Selected Person has to show something and describe it.";
+    			break;
+    			default:
+    			document.getElementById("image").innerHTML = "";
+    			document.getElementById("desc").innerHTML = "";
+			}
+			const index = Games.indexOf(Games[random]);
+			if (index > -1) {
+				Games.splice(index, 1);
+			}
+		}
+
+		function StartTimer() {
+
+
+			var d1 = new Date (),
+			d2 = new Date ( d1 );
+			d2.setMinutes ( d1.getMinutes() + 30 );
+			// Update the count down every 1 second
+			var x = setInterval(function() {
+
+  				// Get today's date and time
+  				var now = new Date().getTime();
+  				var distance = d2 - now;
+    			//document.getElementById("demo1").innerHTML = now;
+
+    			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  				// Output the result in an element with id="demo"
+  				document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
+
+  				// If the count down is over, write some text 
+  				if (distance < 0) {
+  					clearInterval(x);
+  					document.getElementById("demo").innerHTML = "Time For The Special Game";
+  				}
+			}, 1000);
+		}
+
+
+		const persons = ["Nikhitha", "Vinoth", "Divya",  "Priya", "Himabindu","Majala","Pattamal","Krishnaa","Pravin"];
+		function PickRandomPerson() {
+			const random = Math.floor(Math.random() * persons.length);
+			document.getElementById("Person").innerHTML = persons[random]
+
+			const index = persons.indexOf(persons[random]);
+			if (index > -1) {
+				persons.splice(index, 1);
+			}
+		}
+
+
+</script>
+</body>
+</html>
